@@ -36,7 +36,6 @@ import search.Solver;
  * for details.
  * 
 
- * @author liberato
  *
  */
 public class EightPuzzle implements SearchProblem<List<Integer>> {
@@ -70,8 +69,6 @@ public class EightPuzzle implements SearchProblem<List<Integer>> {
     return startingValues;
   }
 
-  
-  
   @Override
   public List<List<Integer>> getSuccessors(List<Integer> currentState) {
     // TODO
