@@ -24,7 +24,40 @@ public class StackBasedDepthFirstSearcher<T> extends Searcher<T> {
   @Override
   public List<T> findSolution() {
     // TODO
-    
-    return null;
+    List<T> path = new ArrayList<>();
+    Stack<T> frontier = new Stack<T>();
+    frontier.push(searchProblem.getInitialState());
+    visited.add(searchProblem.getInitialState());
+    while (!frontier.isEmpty()) {
+      T current = frontier.peek();
+      visited.add(current);
+      if (searchProblem.isGoal(current)) {
+        while (!frontier.isEmpty()) {
+          path.add(0, frontier.pop());
+        }
+        return path;
+      }
+      List<T> next = searchProblem.getSuccessors(current);
+      if (next.isEmpty()) {
+        frontier.pop();
+      } else {
+        int count = 0;
+        for (int i = 0; i < next.size(); i++) {
+          if (!visited.contains(next.get(i))) {
+            frontier.push(next.get(i));
+            break;
+          } else {
+            count++;
+          }
+        }
+        if (count == next.size()) {
+          frontier.pop();
+        }
+      }
+    }
+    while (!frontier.isEmpty()) {
+      path.add(0, frontier.pop());
+    }
+    return path;
   }
 }
